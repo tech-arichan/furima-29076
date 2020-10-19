@@ -58,32 +58,32 @@ describe User, type: :model do
       it 'ユーザー本名の名字が空の場合登録できない' do
         @user.family_name = ""
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name can't be blank", "Family name is invalid")
+        expect(@user.errors.full_messages).to include("Family name can't be blank")
       end
       it 'ユーザー本名の名前が空の場合登録できない' do
         @user.first_name = ""
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name can't be blank", "First name is invalid")
+        expect(@user.errors.full_messages).to include("First name can't be blank")
       end
-      it 'ユーザー本名は全角以外（漢字・平仮名・カタカナ）は登録できない' do
-        @user.family_name_kana = "abe"
+      it 'ユーザー本名は全角でないと登録できない' do
+        @user.family_name = "abe"
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana is invalid")
+        expect(@user.errors.full_messages).to include("Family name is invalid. Input full-width katakana characters.")
       end
-      it 'ユーザー本名の振り仮名の名字が空だと登録できない' do
+      it '振り仮名の名字が空だと登録できない' do
         @user.family_name_kana = ""
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana can't be blank", "Family name kana is invalid")
+        expect(@user.errors.full_messages).to include("Family name kana can't be blank","Family name kana is invalid. Input full-width katakana characters.")
       end
-      it 'ユーザー本名の振り仮名の名前が空だと登録できない' do
+      it '振り仮名の名前が空だと登録できない' do
         @user.first_name_kana = ""
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana can't be blank", "First name kana is invalid")
+        expect(@user.errors.full_messages).to include("First name kana can't be blank","First name kana is invalid. Input full-width katakana characters.")
       end
-      it 'ユーザー本名はの振り仮名は全角カタカナ以外は登録できない' do
+      it '振り仮名は全角でないと登録できない' do
         @user.family_name_kana = "安倍"
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana is invalid")
+        expect(@user.errors.full_messages).to include("Family name kana is invalid. Input full-width katakana characters.")
       end
       it '生年月日が空だと登録できない' do
         @user.birthday = ""
