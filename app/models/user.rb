@@ -15,12 +15,14 @@ class User < ApplicationRecord
     validates :nickname
     
     # 本名：苗字と名前、全角（漢字・平仮名・カタカナ）
-    validates :family_name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "is invalid. Input full-width katakana characters."}
-    validates :first_name
+    zenkaku = /\A[ぁ-んァ-ン一-龥]/
+    validates :family_name, format: { with: zenkaku, message: "is invalid. Input full-width katakana characters."}
+    validates :first_name, format: { with: zenkaku, message: "is invalid. Input full-width katakana characters."}
 
     # 振り仮名：苗字と名前、全角（カタカナ）/\A[ァ-ヶー－]+\z/
-    validates :family_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters."} 
-    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters."} 
+    zenkaku_kana = /\A[ァ-ヶー－]+\z/
+    validates :family_name_kana, format: { with: zenkaku_kana, message: "is invalid. Input full-width katakana characters."} 
+    validates :first_name_kana, format: { with: zenkaku_kana, message: "is invalid. Input full-width katakana characters."} 
 
     # 誕生日必須
     validates :birthday
