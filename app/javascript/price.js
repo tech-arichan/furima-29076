@@ -1,6 +1,6 @@
 function price() {
   const inputPrice = document.getElementById("item-price");
-  inputPrice.addEventListener("keyup", () => {
+  inputPrice.addEventListener("input", () => {
     const itemPrice = inputPrice.value;
     const priceTax = document.getElementById("add-tax-price");
     const commission = (itemPrice*1.1) - itemPrice;
