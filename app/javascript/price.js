@@ -7,7 +7,7 @@ function price() {
     priceTax.innerHTML = Math.round(commission);
 
     const profit = document.getElementById("profit");
-    profit.innerHTML = itemPrice - commission
+    profit.innerHTML = Math.round(itemPrice - commission);
   });
 }
 
