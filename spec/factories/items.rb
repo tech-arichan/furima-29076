@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :item do
-    # image { File.open("#{Rails.root}/spec/images/test.png") }
     name {"マスク"}
     description {"洗って何回も使える"}
     genre_id {1}
