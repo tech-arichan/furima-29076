@@ -5,5 +5,6 @@ FactoryBot.define do
     city {'小城市'}
     house_number {'123'}
     phone_number {'12345678910'}
+    token {"tok_abcdefghijk00000000000000000"}
   end
 end

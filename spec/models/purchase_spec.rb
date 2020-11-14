@@ -44,5 +44,10 @@ RSpec.describe Purchase, type: :model do
       @purchase.valid?
       expect(@purchase.errors.full_messages).to include("Phone number is invalid")
     end
+    it "tokenが空では登録できないこと" do
+      @purchase.token = nil
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Token can't be blank")
+    end
   end
 end
