@@ -44,6 +44,16 @@ RSpec.describe Purchase, type: :model do
       @purchase.valid?
       expect(@purchase.errors.full_messages).to include("Phone number is invalid")
     end
+    it '電話番号はハイフンが存在していたら保存できない' do
+      @purchase.phone_number = "123-45678910"
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Phone number is invalid")
+    end
+    it '電話番号は半角数字以外は保存できない' do
+      @purchase.phone_number = "123456789１0"
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Phone number is invalid")
+    end
     it "tokenが空では登録できないこと" do
       @purchase.token = nil
       @purchase.valid?
