@@ -27,23 +27,19 @@
 
     
     <% if user_signed_in? %> <%# ログインしているユーザーの処理 %>
+      <% if @item.item_purchase.nil? %> <%# 売れてない%>
 
-      <% if current_user.id == @item.user_id %> <%# 出品者の処理 %>
-
-        <% if @item.item_purchase.present? %> <%# 売れてる場合 %>
-          <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
-        <% else %>
+        <% if current_user.id == @item.user_id %> <%# 出品者の処理 %>
           <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
           <p class='or-text'>or</p>
           <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
-        <% end %>
-        
-      <% end %> <%# //出品者の処理 %>
+        <% end %> <%# //出品者の処理 %>
 
-      <% if current_user.id != @item.user_id && @item.item_purchase.nil? %> <%# 購入者の処理 %>
-        <%= link_to '購入画面に進む', item_item_purchases_path(@item.id) ,class:"item-red-btn"%> <%# //購入者の処理 %>
-      <% end %>
+        <% if current_user.id != @item.user_id %> <%# 購入者の処理 %>
+          <%= link_to '購入画面に進む', item_item_purchases_path(@item.id) ,class:"item-red-btn"%>
+        <% end %> <%# //購入者の処理 %>
 
+      <% end %> <%# //売れてないの処理 %>
     <% end %> <%# //ログインしているユーザーの処理 %>
 
     <div class="item-explain-box">
