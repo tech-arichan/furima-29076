@@ -9,6 +9,12 @@ RSpec.describe Purchase, type: :model do
     it '全ての値が正しく入力されていれば保存できる' do
       expect(@purchase).to be_valid
     end
+    it '建物名が空の場合も登録できる' do
+      @purchase.building_name = nil
+      @purchase.valid?
+      expect(@purchase).to be_valid
+    end
+    
     it '郵便番号が空だと保存できない' do
       @purchase.postal_code = nil
       @purchase.valid?
