@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :items
-
+  has_many :item_purchases
+  
   with_options presence: true do
     PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
     validates :password, format: { with: PASSWORD_REGEX}
