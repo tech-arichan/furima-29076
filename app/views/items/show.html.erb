@@ -25,22 +25,27 @@
       </span>
     </div>
 
-    <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-    <% if user_signed_in? && current_user.id == @item.user_id && @item.item_purchase.present? %>
-      <%# 商品がない場合は出品者の削除機能のみ表示 %>
-        <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
-    <% elsif user_signed_in? && current_user.id == @item.user_id %>
-      <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
-      <p class='or-text'>or</p>
-      <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
-    <% elsif user_signed_in? && current_user.id != @item.user_id && @item.item_purchase.nil? %>
-      <%# 商品が売れていない場合はこちらを表示しましょう %>
-      <%= link_to '購入画面に進む', item_item_purchases_path(@item.id) ,class:"item-red-btn"%>
-      <%# //商品が売れていない場合はこちらを表示しましょう %>
-    <% else %>
-      <%# 商品がない状態 購入ボタン非表示 %>
-    <% end %>
-      <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
+    
+    <% if user_signed_in? %> <%# ログインしているユーザーの処理 %>
+
+      <% if current_user.id == @item.user_id %> <%# 出品者の処理 %>
+
+        <% if @item.item_purchase.present? %> <%# 売れてる場合 %>
+          <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
+        <% else %>
+          <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
+          <p class='or-text'>or</p>
+          <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
+        <% end %>
+        
+      <% end %> <%# //出品者の処理 %>
+
+      <% if current_user.id != @item.user_id && @item.item_purchase.nil? %> <%# 購入者の処理 %>
+        <%= link_to '購入画面に進む', item_item_purchases_path(@item.id) ,class:"item-red-btn"%> <%# //購入者の処理 %>
+      <% end %>
+
+    <% end %> <%# //ログインしているユーザーの処理 %>
+
     <div class="item-explain-box">
       <span><%= @item.description %></span>
     </div>

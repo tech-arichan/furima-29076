@@ -4,14 +4,9 @@ class ItemPurchasesController < ApplicationController
   before_action :set_item, only:[:index, :create]
   def index
     if current_user.id == @item.user_id || @item.item_purchase.present? 
-      #出品者は購入画面に遷移できない
-      #購入した商品は再度購入できない
       redirect_to root_path
-    elsif current_user.id != @item.user_id
-      #出品者でなければ購入画面に遷移できる
-      @item_purchase = Purchase.new
     else
-      redirect_to root_path
+      @item_purchase = Purchase.new
     end
   end
 
