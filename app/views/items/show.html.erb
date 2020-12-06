@@ -92,7 +92,7 @@
     <% @comments.reverse_each do |comment| %><%# コメント一覧 %>
       <p><%= comment.comment %>
       <%= comment.user.nickname %></p>
-      <%= link_to '削除する', item_comment_path(comment.id), method: :delete %>
+      <%= link_to '削除する', item_comment_path(@item.id, comment.id), method: :delete %>
     <% end %><%# /コメント一覧 %>
 
 

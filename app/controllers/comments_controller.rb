@@ -7,13 +7,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    @item = Item.find(params[:id])
+    @comment = Comment.find_by(id: params[:id], item_id: params[:item_id])
     @comment.destroy
-    # if @comment.user_id != current_user.id
-    #   flash[:alert] = "その操作はできません"
-    #   redirect_to root_path
-    # end
+    redirect_to item_path(@comment.item.id)
+    # terminal[item_comment DELETE /items/:item_id/comments/:id(.:format)      comments#destroy]
   end
 
   private
