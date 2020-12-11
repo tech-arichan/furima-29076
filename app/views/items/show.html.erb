@@ -90,9 +90,11 @@
   <% if user_signed_in? %>
 
     <% @comments.reverse_each do |comment| %><%# コメント一覧 %>
-      <p><%= comment.comment %>
-      <%= comment.user.nickname %></p>
-      <%= link_to '削除する', item_comment_path(@item.id, comment.id), method: :delete %>
+    <div class="comment-table">
+      <div class="comment-comment"><%= comment.comment %></div>
+      <div class="comment-user"><%= comment.user.nickname %></div>
+      <%= link_to 'コメント削除', item_comment_path(@item.id, comment.id),class:"comment-delete-btn", method: :delete %>
+    </div>
     <% end %><%# /コメント一覧 %>
 
 
