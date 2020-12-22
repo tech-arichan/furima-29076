@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :items
-  has_many :item_purchases
+  has_many :items, dependent: :destroy
+  has_many :item_purchases, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
   with_options presence: true do
     PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
