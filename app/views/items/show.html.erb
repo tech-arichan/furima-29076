@@ -93,7 +93,7 @@
     <div class="comment-table">
       <div class="comment-comment"><%= comment.comment %></div>
       <div class="comment-user"><%= comment.user.nickname %></div>
-      <%= link_to 'コメント削除', item_comment_path(@item.id, comment.id),class:"comment-delete-btn", method: :delete %>
+      <%= link_to '削除', item_comment_path(@item.id, comment.id),class:"comment-delete-btn", method: :delete %>
     </div>
     <% end %><%# /コメント一覧 %>
 
